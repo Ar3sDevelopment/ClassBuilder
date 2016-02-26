@@ -1,16 +1,17 @@
-﻿namespace Caelan.Frameworks.Common.NUnit
+﻿namespace Caelan.Frameworks.ClassBuilder.NUnit
 
 open Caelan.Frameworks.ClassBuilder.Attributes
 open Caelan.Frameworks.ClassBuilder.Classes
-open Caelan.Frameworks.Common.NUnit.Common.Classes
+open Caelan.Frameworks.ClassBuilder.NUnit.Common.Classes
 open NUnit.Framework
 open System
 open System.Diagnostics
 
 [<TestFixture>]
 type BuilderTest() = 
+    
     [<Test>]
-    member __.TestNull() =
+    member __.TestNull() = 
         let stopwatch = Stopwatch()
         stopwatch.Start()
         let a : TestA = Unchecked.defaultof<TestA>
@@ -18,7 +19,7 @@ type BuilderTest() =
         Assert.IsNull(b)
         stopwatch.Stop()
         stopwatch.ElapsedMilliseconds |> printfn "%dms"
-
+    
     [<Test>]
     member __.TestNoBuilder() = 
         let stopwatch = Stopwatch()
@@ -42,7 +43,7 @@ type BuilderTest() =
         str |> printfn "%s"
         stopwatch.Stop()
         stopwatch.ElapsedMilliseconds |> printfn "%dms"
-
+    
     [<Test>]
     member __.TestBuilderEdit() = 
         let stopwatch = Stopwatch()
@@ -80,7 +81,7 @@ type BuilderTest() =
                  str |> printfn "%s")
         stopwatch.Stop()
         stopwatch.ElapsedMilliseconds |> printfn "%dms"
-
+    
     [<Test>]
     member __.TestDefaultMapperAttributes() = 
         let stopwatch = Stopwatch()
@@ -92,7 +93,7 @@ type BuilderTest() =
         str |> printfn "%s"
         stopwatch.Stop()
         stopwatch.ElapsedMilliseconds |> printfn "%dms"
-
+    
     [<Test>]
     member __.TestDefaultMapperEqualsAttribute() = 
         let stopwatch = Stopwatch()
@@ -104,9 +105,9 @@ type BuilderTest() =
         str |> printfn "%s"
         stopwatch.Stop()
         stopwatch.ElapsedMilliseconds |> printfn "%dms"
-
+    
     [<Test>]
-    member __.TestIntFloat() =
+    member __.TestIntFloat() = 
         let stopwatch = Stopwatch()
         stopwatch.Start()
         let source = 10

@@ -1,4 +1,4 @@
-﻿namespace Caelan.Frameworks.Common.NUnit.Common
+﻿namespace Caelan.Frameworks.ClassBuilder.NUnit.Common
 
 open Caelan.Frameworks.ClassBuilder.Classes
 open Classes
