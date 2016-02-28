@@ -5,32 +5,22 @@ open Caelan.Frameworks.ClassBuilder
 open Caelan.Frameworks.Common.Helpers
 open Caelan.Frameworks.ClassBuilder.Interfaces
 open System
+open System.Linq
+open System.Collections.ObjectModel
 open System.Reflection
 
 module Builder = 
-    let mutable private container = ContainerBuilder().Build()
+    let assemblies = ObservableCollection<Assembly>()
     let private isMapper (t : Type) = 
         typeof<IMapper>.IsAssignableFrom(t) && not t.IsAbstract && not t.IsInterface && not t.IsGenericTypeDefinition
+    let private containsMapper (t : Assembly) = t.GetTypes() |> Array.exists isMapper
     
-    let internal getMapper<'TSource, 'TDestination> (assemblies : Assembly []) = 
-        let mutable mapper = Unchecked.defaultof<IMapper<'TSource, 'TDestination>>
-        use scope = container.BeginLifetimeScope()
-        if container.TryResolve<IMapper<'TSource, 'TDestination>>(&mapper) |> not then 
-            let mainAssemblies = assemblies |> Array.filter (isNull >> not)
-            let refAssemblies = mainAssemblies |> Array.collect (fun i -> i.GetReferencedAssemblies() |> Array.map Assembly.Load)
-            
-            let allAssemblies = 
-                mainAssemblies
-                |> Array.append refAssemblies
-                |> Array.filter (fun a -> a.GetTypes() |> Array.exists isMapper)
-            
-            let cb = ContainerBuilder()
-            cb.RegisterGeneric(typedefof<DefaultMapper<'TSource, 'TDestination>>)
-              .As(typedefof<IMapper<'TSource, 'TDestination>>) |> ignore
-            cb.RegisterAssemblyTypes(allAssemblies).Where(fun t -> t |> isMapper).AsImplementedInterfaces() |> ignore
-            cb.Update(container)
-            mapper <- container.Resolve<IMapper<'TSource, 'TDestination>>()
-        mapper
+    let mutable private container = 
+        let cb = ContainerBuilder()
+        cb.RegisterGeneric(typedefof<DefaultMapper<_, _>>).As(typedefof<IMapper<_, _>>) |> ignore
+        cb.RegisterAssemblyTypes(assemblies.AsEnumerable() |> Array.ofSeq).Where(fun t -> t |> isMapper)
+          .AsImplementedInterfaces() |> ignore
+        cb.Build()
     
     let RegisterMapper<'TMapper when 'TMapper :> IMapper>() = 
         let cb = ContainerBuilder()
@@ -42,8 +32,25 @@ module Builder =
         cb.RegisterAssemblyTypes(allAssemblies).Where(fun t -> t |> isMapper).AsImplementedInterfaces() |> ignore
         cb.Update(container) |> ignore
     
+    assemblies.CollectionChanged.Add(fun t -> 
+        registerAssemblies (t.NewItems.Cast<Assembly>()
+                            |> Seq.filter (isNull >> not)
+                            |> Array.ofSeq)
+        t.NewItems.Cast<Assembly>()
+        |> Seq.filter (isNull >> not)
+        |> Seq.collect (fun t -> t.GetReferencedAssemblies())
+        |> Seq.map Assembly.Load
+        |> Seq.filter containsMapper
+        |> Seq.iter assemblies.Add)
+    
+    let internal getMapper<'TSource, 'TDestination>() = 
+        let mutable mapper = Unchecked.defaultof<IMapper<'TSource, 'TDestination>>
+        use scope = container.BeginLifetimeScope()
+        container.TryResolve<IMapper<'TSource, 'TDestination>>(&mapper) |> ignore
+        mapper
+    
     [<Sealed>]
-    type Builder<'T> internal (source, assemblies : Assembly []) = 
+    type Builder<'T> internal (source) = 
         
         /// <summary>
         /// 
@@ -52,9 +59,8 @@ module Builder =
             let destination = Activator.CreateInstance<'TDestination>()
             
             let mapper = 
-                assemblies
-                |> Array.append [| typeof<'TDestination>.Assembly |]
-                |> getMapper<'T, 'TDestination>
+                assemblies.Add(typeof<'TDestination>.Assembly)
+                getMapper<'T, 'TDestination>()
             (destination, mapper) |> this.To
         
         /// <summary>
@@ -70,9 +76,8 @@ module Builder =
         /// <param name="destination"></param>
         member this.To<'TDestination>(destination : 'TDestination) = 
             let mapper = 
-                assemblies
-                |> Array.append [| typeof<'TDestination>.Assembly |]
-                |> getMapper<'T, 'TDestination>
+                assemblies.Add(typeof<'TDestination>.Assembly)
+                getMapper<'T, 'TDestination>()
             (destination, mapper) |> this.To
         
         /// <summary>
@@ -86,16 +91,14 @@ module Builder =
             | Some(s) -> (source, destination) |> mapper.Map
     
     [<Sealed>]
-    type ListBuilder<'T> internal (sourceList, assemblies : Assembly []) = 
+    type ListBuilder<'T> internal (sourceList) = 
         
         /// <summary>
         /// 
         /// </summary>
         member this.ToList<'TDestination>() = 
-            let allAssemblies = assemblies |> Array.append [| typeof<'TDestination>.Assembly |]
-            allAssemblies
-            |> getMapper<'T, 'TDestination>
-            |> this.ToList
+            assemblies.Add(typeof<'TDestination>.Assembly)
+            getMapper<'T, 'TDestination>() |> this.ToList
         
         /// <summary>
         /// 
@@ -108,23 +111,23 @@ module Builder =
     /// </summary>
     /// <param name="source"></param>
     let Build<'T>(source : 'T) = 
-        let assemblies = 
-            [| Assembly.GetCallingAssembly()
-               Assembly.GetExecutingAssembly()
-               Assembly.GetEntryAssembly()
-               AssemblyHelper.GetWebEntryAssembly()
-               typeof<'T>.Assembly |]
-        Builder<'T>(source, assemblies)
+        [| Assembly.GetCallingAssembly()
+           Assembly.GetExecutingAssembly()
+           Assembly.GetEntryAssembly()
+           AssemblyHelper.GetWebEntryAssembly()
+           typeof<'T>.Assembly |]
+        |> Array.iter assemblies.Add
+        Builder<'T>(source)
     
     /// <summary>
     /// 
     /// </summary>
     /// <param name="sourceList"></param>
     let BuildList<'T>(sourceList : seq<'T>) = 
-        let assemblies = 
-            [| Assembly.GetCallingAssembly()
-               Assembly.GetExecutingAssembly()
-               Assembly.GetEntryAssembly()
-               AssemblyHelper.GetWebEntryAssembly()
-               typeof<'T>.Assembly |]
-        ListBuilder<'T>(sourceList, assemblies)
+        [| Assembly.GetCallingAssembly()
+           Assembly.GetExecutingAssembly()
+           Assembly.GetEntryAssembly()
+           AssemblyHelper.GetWebEntryAssembly()
+           typeof<'T>.Assembly |]
+        |> Array.iter assemblies.Add
+        ListBuilder<'T>(sourceList)
