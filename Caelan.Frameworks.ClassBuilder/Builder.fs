@@ -2,24 +2,22 @@
 
 open Autofac
 open Caelan.Frameworks.ClassBuilder
-open Caelan.Frameworks.Common.Helpers
 open Caelan.Frameworks.ClassBuilder.Interfaces
+open Caelan.Frameworks.Common.Helpers
 open System
-open System.Linq
 open System.Collections.ObjectModel
+open System.Linq
 open System.Reflection
 
 module Builder = 
-    let assemblies = ObservableCollection<Assembly>()
-    let private isMapper (t : Type) = 
-        typeof<IMapper>.IsAssignableFrom(t) && not t.IsAbstract && not t.IsInterface && not t.IsGenericTypeDefinition
+    let private assemblies = ObservableCollection<Assembly>()
+    let private isMapper (t : Type) = typeof<IMapper>.IsAssignableFrom(t) && not t.IsAbstract && not t.IsInterface && not t.IsGenericTypeDefinition
     let private containsMapper (t : Assembly) = t.GetTypes() |> Array.exists isMapper
     
     let mutable private container = 
         let cb = ContainerBuilder()
         cb.RegisterGeneric(typedefof<DefaultMapper<_, _>>).As(typedefof<IMapper<_, _>>) |> ignore
-        cb.RegisterAssemblyTypes(assemblies.AsEnumerable() |> Array.ofSeq).Where(fun t -> t |> isMapper)
-          .AsImplementedInterfaces() |> ignore
+        cb.RegisterAssemblyTypes(assemblies.AsEnumerable() |> Array.ofSeq).Where(fun t -> t |> isMapper).AsImplementedInterfaces() |> ignore
         cb.Build()
     
     let RegisterMapper<'TMapper when 'TMapper :> IMapper>() = 
@@ -31,17 +29,16 @@ module Builder =
         let cb = ContainerBuilder()
         cb.RegisterAssemblyTypes(allAssemblies).Where(fun t -> t |> isMapper).AsImplementedInterfaces() |> ignore
         cb.Update(container) |> ignore
+        allAssemblies
+        |> Array.collect (fun t -> t.GetReferencedAssemblies())
+        |> Array.map Assembly.Load
+        |> Array.filter containsMapper
+        |> Array.iter assemblies.Add
     
     assemblies.CollectionChanged.Add(fun t -> 
         registerAssemblies (t.NewItems.Cast<Assembly>()
                             |> Seq.filter (isNull >> not)
-                            |> Array.ofSeq)
-        t.NewItems.Cast<Assembly>()
-        |> Seq.filter (isNull >> not)
-        |> Seq.collect (fun t -> t.GetReferencedAssemblies())
-        |> Seq.map Assembly.Load
-        |> Seq.filter containsMapper
-        |> Seq.iter assemblies.Add)
+                            |> Array.ofSeq))
     
     let internal getMapper<'TSource, 'TDestination>() = 
         let mutable mapper = Unchecked.defaultof<IMapper<'TSource, 'TDestination>>
@@ -67,8 +64,7 @@ module Builder =
         /// 
         /// </summary>
         /// <param name="mapper"></param>
-        member this.To<'TDestination>(mapper : IMapper<'T, 'TDestination>) = 
-            (Activator.CreateInstance<'TDestination>(), mapper) |> this.To
+        member this.To<'TDestination>(mapper : IMapper<'T, 'TDestination>) = (Activator.CreateInstance<'TDestination>(), mapper) |> this.To
         
         /// <summary>
         /// 
