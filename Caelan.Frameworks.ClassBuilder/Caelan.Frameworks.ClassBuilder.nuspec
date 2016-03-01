@@ -16,11 +16,8 @@
     <dependencies>
       <group targetFramework=".NETFramework4.5">
         <dependency id="Autofac" version="3.5.2" />
-        <dependency id="Caelan.Frameworks.Common" version="3.3.1.219" />
+        <dependency id="Caelan.Frameworks.Common" version="3.3.1.240" />
       </group>
     </dependencies>
   </metadata>
-  <files>
-    <file src="bin\$configuration$\$id$.dll" target="lib\$id$.dll" />
-  </files>
 </package>

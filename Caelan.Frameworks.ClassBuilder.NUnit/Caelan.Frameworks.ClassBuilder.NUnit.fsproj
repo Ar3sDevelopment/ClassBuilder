@@ -54,7 +54,7 @@
       <Name>Caelan.Frameworks.ClassBuilder.NUnit.Common</Name>
     </ProjectReference>
     <Reference Include="Caelan.Frameworks.Common">
-      <HintPath>..\packages\Caelan.Frameworks.Common.3.3.1.222\lib\net45\Caelan.Frameworks.Common.dll</HintPath>
+      <HintPath>..\packages\Caelan.Frameworks.Common.3.3.1.240\lib\net45\Caelan.Frameworks.Common.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

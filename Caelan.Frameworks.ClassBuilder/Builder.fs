@@ -32,6 +32,8 @@ module Builder =
         allAssemblies
         |> Array.collect (fun t -> t.GetReferencedAssemblies())
         |> Array.map Assembly.Load
+        |> Array.filter (isNull >> not)
+        |> Array.filter (assemblies.Contains >> not)
         |> Array.filter containsMapper
         |> Array.iter assemblies.Add
     
@@ -56,7 +58,10 @@ module Builder =
             let destination = Activator.CreateInstance<'TDestination>()
             
             let mapper = 
-                assemblies.Add(typeof<'TDestination>.Assembly)
+                if typeof<'TDestination>.Assembly
+                   |> (isNull >> not)
+                   && typeof<'TDestination>.Assembly |> (assemblies.Contains >> not)
+                   && typeof<'TDestination>.Assembly |> containsMapper then assemblies.Add(typeof<'TDestination>.Assembly)
                 getMapper<'T, 'TDestination>()
             (destination, mapper) |> this.To
         
@@ -72,7 +77,10 @@ module Builder =
         /// <param name="destination"></param>
         member this.To<'TDestination>(destination : 'TDestination) = 
             let mapper = 
-                assemblies.Add(typeof<'TDestination>.Assembly)
+                if typeof<'TDestination>.Assembly
+                   |> (isNull >> not)
+                   && typeof<'TDestination>.Assembly |> (assemblies.Contains >> not)
+                   && typeof<'TDestination>.Assembly |> containsMapper then assemblies.Add(typeof<'TDestination>.Assembly)
                 getMapper<'T, 'TDestination>()
             (destination, mapper) |> this.To
         
@@ -93,7 +101,10 @@ module Builder =
         /// 
         /// </summary>
         member this.ToList<'TDestination>() = 
-            assemblies.Add(typeof<'TDestination>.Assembly)
+            if typeof<'TDestination>.Assembly
+               |> (isNull >> not)
+               && typeof<'TDestination>.Assembly |> (assemblies.Contains >> not)
+               && typeof<'TDestination>.Assembly |> containsMapper then assemblies.Add(typeof<'TDestination>.Assembly)
             getMapper<'T, 'TDestination>() |> this.ToList
         
         /// <summary>
@@ -112,6 +123,9 @@ module Builder =
            Assembly.GetEntryAssembly()
            AssemblyHelper.GetWebEntryAssembly()
            typeof<'T>.Assembly |]
+        |> Array.filter (isNull >> not)
+        |> Array.filter (assemblies.Contains >> not)
+        |> Array.filter containsMapper
         |> Array.iter assemblies.Add
         Builder<'T>(source)
     
@@ -125,5 +139,8 @@ module Builder =
            Assembly.GetEntryAssembly()
            AssemblyHelper.GetWebEntryAssembly()
            typeof<'T>.Assembly |]
+        |> Array.filter (isNull >> not)
+        |> Array.filter (assemblies.Contains >> not)
+        |> Array.filter containsMapper
         |> Array.iter assemblies.Add
         ListBuilder<'T>(sourceList)
