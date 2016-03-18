@@ -45,6 +45,7 @@ module Builder =
         registerAssemblies (t.NewItems.Cast<Assembly>()
                             |> Seq.filter (isNull >> not)
                             |> Array.ofSeq))
+    AppDomain.CurrentDomain.GetAssemblies() |> registerAssemblies
     
     let internal getMapper<'TSource, 'TDestination>() = 
         let mutable mapper = Unchecked.defaultof<IMapper<'TSource, 'TDestination>>
@@ -121,30 +122,10 @@ module Builder =
     /// 
     /// </summary>
     /// <param name="source"></param>
-    let Build<'T>(source : 'T) = 
-        [| Assembly.GetCallingAssembly()
-           Assembly.GetExecutingAssembly()
-           Assembly.GetEntryAssembly()
-           AssemblyHelper.GetWebEntryAssembly()
-           typeof<'T>.Assembly |]
-        |> Array.filter (isNull >> not)
-        |> Array.filter (assemblies.Contains >> not)
-        |> Array.filter containsMapper
-        |> Array.iter assemblies.Add
-        Builder<'T>(source)
+    let Build<'T>(source : 'T) = Builder<'T>(source)
     
     /// <summary>
     /// 
     /// </summary>
     /// <param name="sourceList"></param>
-    let BuildList<'T>(sourceList : seq<'T>) = 
-        [| Assembly.GetCallingAssembly()
-           Assembly.GetExecutingAssembly()
-           Assembly.GetEntryAssembly()
-           AssemblyHelper.GetWebEntryAssembly()
-           typeof<'T>.Assembly |]
-        |> Array.filter (isNull >> not)
-        |> Array.filter (assemblies.Contains >> not)
-        |> Array.filter containsMapper
-        |> Array.iter assemblies.Add
-        ListBuilder<'T>(sourceList)
+    let BuildList<'T>(sourceList : seq<'T>) = ListBuilder<'T>(sourceList)
