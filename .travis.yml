@@ -1,8 +1,8 @@
 language: csharp
-solution: Caelan.Frameworks.ClassBuilder.sln
+solution: ClassBuilder.sln
 install:
-  - nuget restore Caelan.Frameworks.ClassBuilder.sln
+  - nuget restore ClassBuilder.sln
   - sudo apt-get install nunit-console
 script:
-  - xbuild /p:Configuration=Release Caelan.Frameworks.ClassBuilder.sln
-  - nunit-console ./Caelan.Frameworks.ClassBuilder.NUnit/bin/Release/Caelan.Frameworks.ClassBuilder.NUnit.dll
+  - xbuild /p:Configuration=Release ClassBuilder.sln
+  - nunit-console ./ClassBuilder.NUnit/bin/Release/ClassBuilder.NUnit.dll
