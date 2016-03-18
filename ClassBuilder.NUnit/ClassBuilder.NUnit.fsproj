@@ -5,8 +5,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{E2782E87-0D07-4712-8F81-34DD157455E2}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Caelan.Frameworks.ClassBuilder.NUnit</RootNamespace>
-    <AssemblyName>Caelan.Frameworks.ClassBuilder.NUnit</AssemblyName>
+    <RootNamespace>ClassBuilder.NUnit</RootNamespace>
+    <AssemblyName>ClassBuilder.NUnit</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -42,19 +42,19 @@
     <Reference Include="FSharp.Core">
       <HintPath>..\packages\FSharp.Core.4.0.0.1\lib\net40\FSharp.Core.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.3.0.1\lib\net45\nunit.framework.dll</HintPath>
-    </Reference>
-    <ProjectReference Include="..\Caelan.Frameworks.ClassBuilder\Caelan.Frameworks.ClassBuilder.fsproj">
-      <Project>{9BCF6E84-4B65-45B8-9787-9A90B76D2257}</Project>
-      <Name>Caelan.Frameworks.ClassBuilder</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Caelan.Frameworks.ClassBuilder.NUnit.Common\Caelan.Frameworks.ClassBuilder.NUnit.Common.fsproj">
-      <Project>{3BD968AB-2879-4335-9FEB-D46741C88FA3}</Project>
-      <Name>Caelan.Frameworks.ClassBuilder.NUnit.Common</Name>
-    </ProjectReference>
     <Reference Include="Caelan.Frameworks.Common">
       <HintPath>..\packages\Caelan.Frameworks.Common.3.3.1.240\lib\net45\Caelan.Frameworks.Common.dll</HintPath>
     </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.3.2.0\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
+    <ProjectReference Include="..\ClassBuilder\ClassBuilder.fsproj">
+      <Project>{9BCF6E84-4B65-45B8-9787-9A90B76D2257}</Project>
+      <Name>ClassBuilder</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ClassBuilder.NUnit.Common\ClassBuilder.NUnit.Common.fsproj">
+      <Project>{3BD968AB-2879-4335-9FEB-D46741C88FA3}</Project>
+      <Name>ClassBuilder.NUnit.Common</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

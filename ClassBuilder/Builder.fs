@@ -1,9 +1,9 @@
-﻿namespace Caelan.Frameworks.ClassBuilder.Classes
+﻿namespace ClassBuilder.Classes
 
 open Autofac
-open Caelan.Frameworks.ClassBuilder
-open Caelan.Frameworks.ClassBuilder.Interfaces
 open Caelan.Frameworks.Common.Helpers
+open ClassBuilder
+open ClassBuilder.Interfaces
 open System
 open System.Collections.ObjectModel
 open System.Linq
@@ -12,7 +12,11 @@ open System.Reflection
 module Builder = 
     let private assemblies = ObservableCollection<Assembly>()
     let private isMapper (t : Type) = typeof<IMapper>.IsAssignableFrom(t) && not t.IsAbstract && not t.IsInterface && not t.IsGenericTypeDefinition
-    let private containsMapper (t : Assembly) = t.GetTypes() |> Array.exists isMapper
+    
+    let private containsMapper (t : Assembly) = 
+        try 
+            t.GetTypes() |> Array.exists isMapper
+        with _ -> false
     
     let mutable private container = 
         let cb = ContainerBuilder()
@@ -41,6 +45,7 @@ module Builder =
         registerAssemblies (t.NewItems.Cast<Assembly>()
                             |> Seq.filter (isNull >> not)
                             |> Array.ofSeq))
+    AppDomain.CurrentDomain.GetAssemblies() |> registerAssemblies
     
     let internal getMapper<'TSource, 'TDestination>() = 
         let mutable mapper = Unchecked.defaultof<IMapper<'TSource, 'TDestination>>
@@ -117,30 +122,10 @@ module Builder =
     /// 
     /// </summary>
     /// <param name="source"></param>
-    let Build<'T>(source : 'T) = 
-        [| Assembly.GetCallingAssembly()
-           Assembly.GetExecutingAssembly()
-           Assembly.GetEntryAssembly()
-           AssemblyHelper.GetWebEntryAssembly()
-           typeof<'T>.Assembly |]
-        |> Array.filter (isNull >> not)
-        |> Array.filter (assemblies.Contains >> not)
-        |> Array.filter containsMapper
-        |> Array.iter assemblies.Add
-        Builder<'T>(source)
+    let Build<'T>(source : 'T) = Builder<'T>(source)
     
     /// <summary>
     /// 
     /// </summary>
     /// <param name="sourceList"></param>
-    let BuildList<'T>(sourceList : seq<'T>) = 
-        [| Assembly.GetCallingAssembly()
-           Assembly.GetExecutingAssembly()
-           Assembly.GetEntryAssembly()
-           AssemblyHelper.GetWebEntryAssembly()
-           typeof<'T>.Assembly |]
-        |> Array.filter (isNull >> not)
-        |> Array.filter (assemblies.Contains >> not)
-        |> Array.filter containsMapper
-        |> Array.iter assemblies.Add
-        ListBuilder<'T>(sourceList)
+    let BuildList<'T>(sourceList : seq<'T>) = ListBuilder<'T>(sourceList)

@@ -1,8 +1,8 @@
-﻿namespace Caelan.Frameworks.ClassBuilder.NUnit
+﻿namespace ClassBuilder.NUnit
 
-open Caelan.Frameworks.ClassBuilder.Attributes
-open Caelan.Frameworks.ClassBuilder.Classes
-open Caelan.Frameworks.ClassBuilder.NUnit.Common.Classes
+open ClassBuilder.Attributes
+open ClassBuilder.Classes
+open ClassBuilder.NUnit.Common.Classes
 open NUnit.Framework
 open System
 open System.Diagnostics

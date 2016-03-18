@@ -1,7 +1,7 @@
-﻿namespace Caelan.Frameworks.ClassBuilder.NUnit.Common
+﻿namespace ClassBuilder.NUnit.Common
 
+open ClassBuilder.Attributes
 open System
-open Caelan.Frameworks.ClassBuilder.Attributes
 
 module Classes = 
     [<MapEquals>]
