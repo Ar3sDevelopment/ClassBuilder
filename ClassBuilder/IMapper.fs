@@ -1,4 +1,4 @@
-﻿namespace Caelan.Frameworks.ClassBuilder.Interfaces
+﻿namespace ClassBuilder.Interfaces
 
 type IMapper =
     interface

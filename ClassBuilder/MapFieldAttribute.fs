@@ -1,4 +1,4 @@
-﻿namespace Caelan.Frameworks.ClassBuilder.Attributes
+﻿namespace ClassBuilder.Attributes
 open System
 
 [<AllowNullLiteral>]

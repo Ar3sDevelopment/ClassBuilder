@@ -1,9 +1,9 @@
-﻿module Caelan.Frameworks.ClassBuilder.NUnit.Common.AssemblyInfo
+﻿module ClassBuilder.NUnit.Common.AssemblyInfo
 
 open System.Reflection
 open System.Runtime.CompilerServices
 
-[<assembly:AssemblyTitle("Caelan.Frameworks.ClassBuilder.NUnit.Common")>]
+[<assembly:AssemblyTitle("ClassBuilder.NUnit.Common")>]
 [<assembly:AssemblyDescription("")>]
 [<assembly:AssemblyConfiguration("")>]
 [<assembly:AssemblyCompany("")>]

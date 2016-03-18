@@ -1,9 +1,9 @@
-﻿namespace Caelan.Frameworks.ClassBuilder.Classes
+﻿namespace ClassBuilder.Classes
 
 open Autofac
-open Caelan.Frameworks.ClassBuilder
-open Caelan.Frameworks.ClassBuilder.Interfaces
 open Caelan.Frameworks.Common.Helpers
+open ClassBuilder
+open ClassBuilder.Interfaces
 open System
 open System.Collections.ObjectModel
 open System.Linq
@@ -12,7 +12,11 @@ open System.Reflection
 module Builder = 
     let private assemblies = ObservableCollection<Assembly>()
     let private isMapper (t : Type) = typeof<IMapper>.IsAssignableFrom(t) && not t.IsAbstract && not t.IsInterface && not t.IsGenericTypeDefinition
-    let private containsMapper (t : Assembly) = t.GetTypes() |> Array.exists isMapper
+    
+    let private containsMapper (t : Assembly) = 
+        try 
+            t.GetTypes() |> Array.exists isMapper
+        with _ -> false
     
     let mutable private container = 
         let cb = ContainerBuilder()
