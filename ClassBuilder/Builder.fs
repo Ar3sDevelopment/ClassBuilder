@@ -35,7 +35,9 @@ module Builder =
         cb.Update(container) |> ignore
         allAssemblies
         |> Array.collect (fun t -> t.GetReferencedAssemblies())
-        |> Array.map Assembly.Load
+        |> Array.map (fun t -> try
+                                    t |> Assembly.Load
+                                with _ -> null)
         |> Array.filter (isNull >> not)
         |> Array.filter (assemblies.Contains >> not)
         |> Array.filter containsMapper
