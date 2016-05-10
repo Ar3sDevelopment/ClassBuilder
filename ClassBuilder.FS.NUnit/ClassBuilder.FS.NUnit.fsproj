@@ -8,6 +8,7 @@
     <RootNamespace>ClassBuilder.NUnit</RootNamespace>
     <AssemblyName>ClassBuilder.NUnit</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <Name>ClassBuilder.FS.NUnit</Name>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -17,7 +18,8 @@
     <ErrorReport>prompt</ErrorReport>
     <ConsolePause>false</ConsolePause>
     <Tailcalls>false</Tailcalls>
-    <PlatformTarget></PlatformTarget>
+    <PlatformTarget>
+    </PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>false</DebugSymbols>
@@ -25,10 +27,12 @@
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
-    <PlatformTarget></PlatformTarget>
+    <PlatformTarget>
+    </PlatformTarget>
     <ConsolePause>false</ConsolePause>
     <Tailcalls>true</Tailcalls>
-    <DefineConstants></DefineConstants>
+    <DefineConstants>
+    </DefineConstants>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.FSharp.Targets" />
   <ItemGroup>
@@ -36,25 +40,29 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ClassBuilder.NUnit.Common\ClassBuilder.NUnit.Common.csproj">
+      <Name>ClassBuilder.NUnit.Common</Name>
+      <Project>{d1f24c55-5619-44a1-ac91-26bc306e576d}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\ClassBuilder\ClassBuilder.csproj">
+      <Name>ClassBuilder</Name>
+      <Project>{e71f8d31-a858-40fb-8e15-8895240f2039}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <Reference Include="Caelan.Frameworks.Common">
+      <HintPath>..\packages\Caelan.Frameworks.Common.3.3.1.260\lib\net45\Caelan.Frameworks.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="mscorlib" />
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.3.2.1\lib\net45\nunit.framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="FSharp.Core">
       <HintPath>..\packages\FSharp.Core.4.0.0.1\lib\net40\FSharp.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Caelan.Frameworks.Common">
-      <HintPath>..\packages\Caelan.Frameworks.Common.3.3.1.240\lib\net45\Caelan.Frameworks.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.3.2.0\lib\net45\nunit.framework.dll</HintPath>
-    </Reference>
-    <ProjectReference Include="..\ClassBuilder\ClassBuilder.fsproj">
-      <Project>{9BCF6E84-4B65-45B8-9787-9A90B76D2257}</Project>
-      <Name>ClassBuilder</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ClassBuilder.NUnit.Common\ClassBuilder.NUnit.Common.fsproj">
-      <Project>{3BD968AB-2879-4335-9FEB-D46741C88FA3}</Project>
-      <Name>ClassBuilder.NUnit.Common</Name>
-    </ProjectReference>
   </ItemGroup>
 </Project>
