@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution 
 		appveyor.yml = appveyor.yml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassBuilder", "ClassBuilder\ClassBuilder.csproj", "{E71F8D31-A858-40FB-8E15-8895240F2039}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{3BD968AB-2879-4335-9FEB-D46741C88FA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BD968AB-2879-4335-9FEB-D46741C88FA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BD968AB-2879-4335-9FEB-D46741C88FA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E71F8D31-A858-40FB-8E15-8895240F2039}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E71F8D31-A858-40FB-8E15-8895240F2039}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E71F8D31-A858-40FB-8E15-8895240F2039}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E71F8D31-A858-40FB-8E15-8895240F2039}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

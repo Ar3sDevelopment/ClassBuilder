@@ -58,7 +58,6 @@
     <Compile Include="DefaultMapper.fs" />
     <Compile Include="Builder.fs" />
     <Content Include="packages.config" />
-    <None Include="ClassBuilder.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Autofac">
