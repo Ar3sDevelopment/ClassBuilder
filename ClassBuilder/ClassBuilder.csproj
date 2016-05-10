@@ -46,8 +46,8 @@
   <ItemGroup>
     <Compile Include="Classes\Builder.cs" />
     <Compile Include="Classes\DefaultMapper.cs" />
-    <Compile Include="Classes\MapEqualsAttribute.cs" />
-    <Compile Include="Classes\MapFieldAttribute.cs" />
+    <Compile Include="Attributes\MapEqualsAttribute.cs" />
+    <Compile Include="Attributes\MapFieldAttribute.cs" />
     <Compile Include="Interfaces\IMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -54,9 +54,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClassBuilder.FS\ClassBuilder.FS.fsproj">
-      <Name>ClassBuilder.FS</Name>
-      <Project>{9bcf6e84-4b65-45b8-9787-9a90b76d2257}</Project>
+    <ProjectReference Include="..\ClassBuilder\ClassBuilder.csproj">
+      <Name>ClassBuilder</Name>
+      <Project>{e71f8d31-a858-40fb-8e15-8895240f2039}</Project>
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
