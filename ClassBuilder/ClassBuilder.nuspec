@@ -16,7 +16,6 @@
     <dependencies>
       <group targetFramework=".NETFramework4.5">
         <dependency id="Autofac" version="3.5.2" />
-        <dependency id="Caelan.Frameworks.Common" version="3.3.1.240" />
       </group>
     </dependencies>
   </metadata>

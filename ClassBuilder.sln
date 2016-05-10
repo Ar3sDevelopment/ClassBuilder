@@ -1,17 +1,18 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "ClassBuilder", "ClassBuilder\ClassBuilder.fsproj", "{9BCF6E84-4B65-45B8-9787-9A90B76D2257}"
-EndProject
-Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "ClassBuilder.NUnit", "ClassBuilder.NUnit\ClassBuilder.NUnit.fsproj", "{E2782E87-0D07-4712-8F81-34DD157455E2}"
-EndProject
-Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "ClassBuilder.NUnit.Common", "ClassBuilder.NUnit.Common\ClassBuilder.NUnit.Common.fsproj", "{3BD968AB-2879-4335-9FEB-D46741C88FA3}"
-EndProject
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution Files", "{A723DDBB-687A-47CE-BE58-33B42549E76D}"
 	ProjectSection(SolutionItems) = preProject
-		appveyor.yml = appveyor.yml
 		.travis.yml = .travis.yml
+		appveyor.yml = appveyor.yml
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassBuilder", "ClassBuilder\ClassBuilder.csproj", "{E71F8D31-A858-40FB-8E15-8895240F2039}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassBuilder.NUnit.Common", "ClassBuilder.NUnit.Common\ClassBuilder.NUnit.Common.csproj", "{D1F24C55-5619-44A1-AC91-26BC306E576D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassBuilder.NUnit", "ClassBuilder.NUnit\ClassBuilder.NUnit.csproj", "{067456C0-086C-46A8-B37F-1405717B7BFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,18 +20,21 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9BCF6E84-4B65-45B8-9787-9A90B76D2257}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9BCF6E84-4B65-45B8-9787-9A90B76D2257}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9BCF6E84-4B65-45B8-9787-9A90B76D2257}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9BCF6E84-4B65-45B8-9787-9A90B76D2257}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E2782E87-0D07-4712-8F81-34DD157455E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E2782E87-0D07-4712-8F81-34DD157455E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E2782E87-0D07-4712-8F81-34DD157455E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E2782E87-0D07-4712-8F81-34DD157455E2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3BD968AB-2879-4335-9FEB-D46741C88FA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3BD968AB-2879-4335-9FEB-D46741C88FA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3BD968AB-2879-4335-9FEB-D46741C88FA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3BD968AB-2879-4335-9FEB-D46741C88FA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E71F8D31-A858-40FB-8E15-8895240F2039}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E71F8D31-A858-40FB-8E15-8895240F2039}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E71F8D31-A858-40FB-8E15-8895240F2039}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E71F8D31-A858-40FB-8E15-8895240F2039}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1F24C55-5619-44A1-AC91-26BC306E576D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1F24C55-5619-44A1-AC91-26BC306E576D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1F24C55-5619-44A1-AC91-26BC306E576D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1F24C55-5619-44A1-AC91-26BC306E576D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{067456C0-086C-46A8-B37F-1405717B7BFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{067456C0-086C-46A8-B37F-1405717B7BFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{067456C0-086C-46A8-B37F-1405717B7BFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{067456C0-086C-46A8-B37F-1405717B7BFC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0
