@@ -40,9 +40,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClassBuilder.FS.NUnit.Common\ClassBuilder.FS.NUnit.Common.fsproj">
-      <Name>ClassBuilder.FS.NUnit.Common</Name>
-      <Project>{3bd968ab-2879-4335-9feb-d46741c88fa3}</Project>
+    <ProjectReference Include="..\ClassBuilder.NUnit.Common\ClassBuilder.NUnit.Common.csproj">
+      <Name>ClassBuilder.NUnit.Common</Name>
+      <Project>{d1f24c55-5619-44a1-ac91-26bc306e576d}</Project>
       <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\ClassBuilder\ClassBuilder.csproj">
@@ -50,17 +50,19 @@
       <Project>{e71f8d31-a858-40fb-8e15-8895240f2039}</Project>
       <Private>True</Private>
     </ProjectReference>
+    <Reference Include="Caelan.Frameworks.Common">
+      <HintPath>..\packages\Caelan.Frameworks.Common.3.3.1.260\lib\net45\Caelan.Frameworks.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="mscorlib" />
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.3.2.1\lib\net45\nunit.framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="FSharp.Core">
       <HintPath>..\packages\FSharp.Core.4.0.0.1\lib\net40\FSharp.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Caelan.Frameworks.Common">
-      <HintPath>..\packages\Caelan.Frameworks.Common.3.3.1.240\lib\net45\Caelan.Frameworks.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.3.2.0\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>
