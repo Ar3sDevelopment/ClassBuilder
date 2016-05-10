@@ -8,6 +8,7 @@
     <RootNamespace>ClassBuilder.NUnit</RootNamespace>
     <AssemblyName>ClassBuilder.NUnit</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <Name>ClassBuilder.FS.NUnit</Name>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -17,7 +18,8 @@
     <ErrorReport>prompt</ErrorReport>
     <ConsolePause>false</ConsolePause>
     <Tailcalls>false</Tailcalls>
-    <PlatformTarget></PlatformTarget>
+    <PlatformTarget>
+    </PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>false</DebugSymbols>
@@ -25,10 +27,12 @@
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
-    <PlatformTarget></PlatformTarget>
+    <PlatformTarget>
+    </PlatformTarget>
     <ConsolePause>false</ConsolePause>
     <Tailcalls>true</Tailcalls>
-    <DefineConstants></DefineConstants>
+    <DefineConstants>
+    </DefineConstants>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.FSharp.Targets" />
   <ItemGroup>
@@ -36,6 +40,16 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ClassBuilder.FS.NUnit.Common\ClassBuilder.FS.NUnit.Common.fsproj">
+      <Name>ClassBuilder.FS.NUnit.Common</Name>
+      <Project>{3bd968ab-2879-4335-9feb-d46741c88fa3}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\ClassBuilder.FS\ClassBuilder.FS.fsproj">
+      <Name>ClassBuilder.FS</Name>
+      <Project>{9bcf6e84-4b65-45b8-9787-9a90b76d2257}</Project>
+      <Private>True</Private>
+    </ProjectReference>
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -48,13 +62,5 @@
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.3.2.0\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
-    <ProjectReference Include="..\ClassBuilder\ClassBuilder.fsproj">
-      <Project>{9BCF6E84-4B65-45B8-9787-9A90B76D2257}</Project>
-      <Name>ClassBuilder</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ClassBuilder.NUnit.Common\ClassBuilder.NUnit.Common.fsproj">
-      <Project>{3BD968AB-2879-4335-9FEB-D46741C88FA3}</Project>
-      <Name>ClassBuilder.NUnit.Common</Name>
-    </ProjectReference>
   </ItemGroup>
 </Project>

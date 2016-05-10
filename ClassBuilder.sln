@@ -1,16 +1,17 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "ClassBuilder", "ClassBuilder\ClassBuilder.fsproj", "{9BCF6E84-4B65-45B8-9787-9A90B76D2257}"
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ClassBuilder.FS", "ClassBuilder.FS\ClassBuilder.FS.fsproj", "{9BCF6E84-4B65-45B8-9787-9A90B76D2257}"
 EndProject
-Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "ClassBuilder.NUnit", "ClassBuilder.NUnit\ClassBuilder.NUnit.fsproj", "{E2782E87-0D07-4712-8F81-34DD157455E2}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ClassBuilder.FS.NUnit", "ClassBuilder.FS.NUnit\ClassBuilder.FS.NUnit.fsproj", "{E2782E87-0D07-4712-8F81-34DD157455E2}"
 EndProject
-Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "ClassBuilder.NUnit.Common", "ClassBuilder.NUnit.Common\ClassBuilder.NUnit.Common.fsproj", "{3BD968AB-2879-4335-9FEB-D46741C88FA3}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ClassBuilder.FS.NUnit.Common", "ClassBuilder.FS.NUnit.Common\ClassBuilder.FS.NUnit.Common.fsproj", "{3BD968AB-2879-4335-9FEB-D46741C88FA3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution Files", "{A723DDBB-687A-47CE-BE58-33B42549E76D}"
 	ProjectSection(SolutionItems) = preProject
-		appveyor.yml = appveyor.yml
 		.travis.yml = .travis.yml
+		appveyor.yml = appveyor.yml
 	EndProjectSection
 EndProject
 Global
@@ -31,6 +32,9 @@ Global
 		{3BD968AB-2879-4335-9FEB-D46741C88FA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BD968AB-2879-4335-9FEB-D46741C88FA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BD968AB-2879-4335-9FEB-D46741C88FA3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0

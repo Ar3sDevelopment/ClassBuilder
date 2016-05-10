@@ -8,6 +8,7 @@
     <RootNamespace>ClassBuilder.NUnit.Common</RootNamespace>
     <AssemblyName>ClassBuilder.NUnit.Common</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <Name>ClassBuilder.FS.NUnit.Common</Name>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -17,7 +18,8 @@
     <ErrorReport>prompt</ErrorReport>
     <ConsolePause>false</ConsolePause>
     <Tailcalls>false</Tailcalls>
-    <PlatformTarget></PlatformTarget>
+    <PlatformTarget>
+    </PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>false</DebugSymbols>
@@ -25,10 +27,12 @@
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
-    <PlatformTarget></PlatformTarget>
+    <PlatformTarget>
+    </PlatformTarget>
     <ConsolePause>false</ConsolePause>
     <Tailcalls>true</Tailcalls>
-    <DefineConstants></DefineConstants>
+    <DefineConstants>
+    </DefineConstants>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.FSharp.Targets" />
   <ItemGroup>
@@ -50,9 +54,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClassBuilder\ClassBuilder.fsproj">
-      <Project>{9BCF6E84-4B65-45B8-9787-9A90B76D2257}</Project>
-      <Name>ClassBuilder</Name>
+    <ProjectReference Include="..\ClassBuilder.FS\ClassBuilder.FS.fsproj">
+      <Name>ClassBuilder.FS</Name>
+      <Project>{9bcf6e84-4b65-45b8-9787-9a90b76d2257}</Project>
+      <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
 </Project>
