@@ -5,4 +5,4 @@ install:
   - sudo apt-get install nunit-console
 script:
   - xbuild /p:Configuration=Release ClassBuilder.sln
-  - nunit-console ./ClassBuilder.FS.NUnit/bin/Release/ClassBuilder.NUnit.dll
+  - nunit-console ./ClassBuilder.NUnit/bin/Release/ClassBuilder.NUnit.dll
