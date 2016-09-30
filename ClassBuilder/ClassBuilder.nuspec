@@ -15,7 +15,7 @@
     <tags>caelan frameworks builder common class mapper classbuilder mapper building ioc framework</tags>
     <dependencies>
       <group targetFramework=".NETFramework4.5">
-        <dependency id="Autofac" version="3.5.2" />
+        <dependency id="Autofac" version="4.1.1" />
       </group>
     </dependencies>
   </metadata>
